@@ -82,7 +82,7 @@ Once the Employee Creator App is up and running, you can perform the following a
 
 The folder structure of the Employee Creator API is as follows:
 
-```arduino
+```
 Employee-Creator-BE/
 ├── src/
 │   ├── main/
