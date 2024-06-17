@@ -7,7 +7,6 @@ This is an Employee Creator API built with Java Spring Boot. The API allows user
 - [Features](#features)
 - [Prerequisites](#prerequisites)
 - [Installation and Running the App](#installation-and-running-the-app)
--
 - [Usage](#usage)
 - [Folder Structure](#folder-structure)
 - [Contributing](#contributing)
