@@ -9,6 +9,8 @@ import org.modelmapper.spi.MappingContext;
 import com.employees.empcreator.Employee;
 import com.employees.empcreator.dto.CreateEmployeeDTO;
 import com.employees.empcreator.dto.UpdateEmployeeDTO;
+import com.employees.users.CreateUserDTO;
+import com.employees.users.User;
 
 @Configuration
 public class ModelMapperConfig {
@@ -30,6 +32,13 @@ public class ModelMapperConfig {
         mapper.typeMap(UpdateEmployeeDTO.class, Employee.class).addMappings(m -> {
             m.map(UpdateEmployeeDTO::getContractType, Employee::setContractType);
             m.map(UpdateEmployeeDTO::getEmploymentType, Employee::setEmploymentType);
+        });
+
+        // Create User mapping
+        mapper.typeMap(CreateUserDTO.class, User.class).addMappings(m -> {
+            m.map(CreateUserDTO::getUsername, User::setUsername);
+            m.map(CreateUserDTO::getPassword, User::setPassword);
+            m.map(CreateUserDTO::getRole, User::setRoles);
         });
 
         return mapper;
