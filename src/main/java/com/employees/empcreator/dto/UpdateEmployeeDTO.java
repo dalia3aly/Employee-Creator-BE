@@ -1,8 +1,10 @@
 package com.employees.empcreator.dto;
 
 import java.time.LocalDate;
+
 import com.employees.empcreator.ContractType;
 import com.employees.empcreator.EmploymentType;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
