@@ -1,4 +1,4 @@
-package com.employees.users;
+package com.employees.empcreator.users;
 
 import org.springframework.data.annotation.Id;
 import jakarta.persistence.*;
@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id

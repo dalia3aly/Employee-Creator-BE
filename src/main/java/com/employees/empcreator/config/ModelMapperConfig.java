@@ -1,4 +1,4 @@
-package com.employees.config;
+package com.employees.empcreator.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
@@ -6,11 +6,11 @@ import org.springframework.context.annotation.Configuration;
 import org.modelmapper.Converter;
 import org.modelmapper.spi.MappingContext;
 
-import com.employees.empcreator.Employee;
-import com.employees.empcreator.dto.CreateEmployeeDTO;
-import com.employees.empcreator.dto.UpdateEmployeeDTO;
-import com.employees.users.CreateUserDTO;
-import com.employees.users.User;
+import com.employees.empcreator.employee.Employee;
+import com.employees.empcreator.employee.dto.CreateEmployeeDTO;
+import com.employees.empcreator.employee.dto.UpdateEmployeeDTO;
+import com.employees.empcreator.users.CreateUserDTO;
+import com.employees.empcreator.users.User;
 
 @Configuration
 public class ModelMapperConfig {

@@ -1,4 +1,4 @@
-package com.employees;
+package com.employees.empcreator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

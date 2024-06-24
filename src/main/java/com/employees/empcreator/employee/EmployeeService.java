@@ -1,4 +1,4 @@
-package com.employees.empcreator;
+package com.employees.empcreator.employee;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,9 +8,9 @@ import org.modelmapper.ModelMapper;
 import java.util.List;
 import java.util.Optional;
 
-import com.employees.empcreator.dto.CreateEmployeeDTO;
-import com.employees.empcreator.dto.UpdateEmployeeDTO;
-import com.employees.exceptions.EmployeeNotFoundException;
+import com.employees.empcreator.employee.dto.CreateEmployeeDTO;
+import com.employees.empcreator.employee.dto.UpdateEmployeeDTO;
+import com.employees.empcreator.exceptions.EmployeeNotFoundException;
 
 @Service
 @Transactional

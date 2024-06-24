@@ -11,12 +11,6 @@
       "type": "java.lang.Integer",
       "description": "Expiration time for JWT tokens in seconds",
       "sourceType": "com.employees.securityConfigs.JwtTokenUtil"
-    },
-    {
-      "name": "jwt.token.prefix",
-      "type": "java.lang.String",
-      "description": "Prefix for the JWT token",
-      "sourceType": "com.employees.securityConfigs.JwtTokenUtil"
     }
   ]
 }

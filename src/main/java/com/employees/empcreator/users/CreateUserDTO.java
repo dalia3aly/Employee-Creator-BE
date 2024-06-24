@@ -1,4 +1,4 @@
-package com.employees.users;
+package com.employees.empcreator.users;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

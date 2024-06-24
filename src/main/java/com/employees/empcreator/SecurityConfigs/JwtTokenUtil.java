@@ -1,4 +1,4 @@
-package com.employees.secconfigs;
+package com.employees.empcreator.SecurityConfigs;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

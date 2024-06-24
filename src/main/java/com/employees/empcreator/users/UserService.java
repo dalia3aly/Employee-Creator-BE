@@ -1,4 +1,4 @@
-package com.employees.users;
+package com.employees.empcreator.users;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

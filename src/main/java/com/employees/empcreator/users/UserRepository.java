@@ -1,4 +1,4 @@
-package com.employees.users;
+package com.employees.empcreator.users;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;

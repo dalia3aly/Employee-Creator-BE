@@ -1,4 +1,4 @@
-package com.employees.secconfigs;
+package com.employees.empcreator.SecurityConfigs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
