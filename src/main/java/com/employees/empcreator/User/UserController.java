@@ -39,13 +39,16 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
+        System.out.println("Attempting to authenticate user: " + loginRequest.getUsername());
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwt = jwtTokenUtil.generateToken(authentication);
+            System.out.println("Generated JWT: " + jwt);
             return ResponseEntity.ok(new JwtResponse(jwt));
         } catch (Exception e) {
+            e.printStackTrace(); // Add stack trace to logs for debugging
             return ResponseEntity.badRequest().body("Invalid username or password");
         }
     }
