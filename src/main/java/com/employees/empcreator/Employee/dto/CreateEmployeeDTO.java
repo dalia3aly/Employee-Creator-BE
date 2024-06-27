@@ -1,8 +1,9 @@
-package com.employees.empcreator.dto;
+package com.employees.empcreator.Employee.dto;
 
 import java.time.LocalDate;
-import com.employees.empcreator.ContractType;
-import com.employees.empcreator.EmploymentType;
+
+import com.employees.empcreator.Employee.ContractType;
+import com.employees.empcreator.Employee.EmploymentType;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

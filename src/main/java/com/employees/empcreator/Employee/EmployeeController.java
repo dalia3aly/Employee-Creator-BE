@@ -1,10 +1,10 @@
-package com.employees.empcreator;
+package com.employees.empcreator.Employee;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.employees.empcreator.dto.CreateEmployeeDTO;
-import com.employees.empcreator.dto.UpdateEmployeeDTO;
+import com.employees.empcreator.Employee.dto.CreateEmployeeDTO;
+import com.employees.empcreator.Employee.dto.UpdateEmployeeDTO;
 
 import java.util.List;
 import java.util.Optional;
