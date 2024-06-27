@@ -1,63 +1,62 @@
-// package com.employees.empcreator.User;
+package com.employees.empcreator.User;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.http.ResponseEntity;
-// import org.springframework.security.authentication.AuthenticationManager;
-// import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-// import org.springframework.security.core.Authentication;
-// import org.springframework.security.core.context.SecurityContextHolder;
-// import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 
-// import io.jsonwebtoken.impl.JwtTokenizer;
-// import jakarta.validation.Valid;
+import com.employees.common.config.SecurityConfigs.JwtTokenUtil;
+import com.employees.exceptions.UserNotFoundException;
 
-// @RestController
-// @RequestMapping("/api/users")
-// public class UserController {
+import jakarta.validation.Valid;
 
-//     private final UserService userService;
-//     private final AuthenticationManager authenticationManager;
-//     private final JwtTokenizer jwtTokenUtil;
+@RestController
+@RequestMapping("/api/users")
+public class UserController {
 
-//     public UserController(UserService userService, AuthenticationManager authenticationManager,
-//             JwtTokenizer jwtTokenUtil) {
-//         this.userService = userService;
-//         this.authenticationManager = authenticationManager;
-//         this.jwtTokenUtil = jwtTokenUtil;
-//     }
+    private final UserService userService;
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenUtil jwtTokenUtil;
 
-//     @PostMapping("/register")
-//     public ResponseEntity<?> registerUser(@Valid @RequestBody CreateUserDTO createUserDTO) {
-//         try {
-//             userService.createUser(createUserDTO);
-//             return ResponseEntity.ok("User registered successfully");
-//         } catch (RuntimeException e) {
-//             return ResponseEntity.badRequest().body(e.getMessage());
-//         }
-//     }
+    public UserController(UserService userService, AuthenticationManager authenticationManager,
+            JwtTokenUtil jwtTokenUtil) {
+        this.userService = userService;
+        this.authenticationManager = authenticationManager;
+        this.jwtTokenUtil = jwtTokenUtil;
+    }
 
-//     @PostMapping("/login")
-//     public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
-//         try {
-//             Authentication authentication = authenticationManager.authenticate(
-//                     new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+    @PostMapping("/register")
+    public ResponseEntity<?> registerUser(@Valid @RequestBody CreateUserDTO createUserDTO) {
+        try {
+            userService.createUser(createUserDTO);
+            return ResponseEntity.ok("User registered successfully");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 
-//             SecurityContextHolder.getContext().setAuthentication(authentication);
-//             String jwt = jwtTokenUtil.generateToken(authentication);
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            String jwt = jwtTokenUtil.generateToken(authentication);
+            return ResponseEntity.ok(new JwtResponse(jwt));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Invalid username or password");
+        }
+    }
 
-//             return ResponseEntity.ok(new JwtResponse(jwt));
-//         } catch (Exception e) {
-//             return ResponseEntity.badRequest().body("Invalid username or password");
-//         }
-//     }
-
-//     @GetMapping("/{id}")
-//     public ResponseEntity<?> getUserById(@PathVariable Long id) {
-//         try {
-//             User user = userService.getUserById(id);
-//             return ResponseEntity.ok(user);
-//         } catch (RuntimeException e) {
-//             return ResponseEntity.notFound().build();
-//         }
-//     }
-// }
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getUserById(@PathVariable Long id) {
+        try {
+            User user = userService.getUserById(id).orElseThrow(() -> new UserNotFoundException("User not found"));
+            return ResponseEntity.ok(user);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+}
