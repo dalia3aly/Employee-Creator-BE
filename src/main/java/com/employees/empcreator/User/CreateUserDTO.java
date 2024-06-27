@@ -1,25 +1,21 @@
 package com.employees.empcreator.User;
 
-import java.time.LocalDate;
-
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 public class CreateUserDTO {
     @NotBlank(message = "Please enter a Username")
-    @Pattern(regexp = "\\d{8}", message = "Username should be 8 digits")
+    @Size(min = 8, max = 8, message = "Username should be 8 characters")
     private String username;
 
     @NotBlank(message = "Please enter a strong password")
+    @Size(min = 8, max = 16, message = "Password should be between 8 and 16 characters")
     private String password;
 
     @Pattern(regexp = "^(.+)@(.+)$", message = "Please enter a valid email")
     @NotBlank(message = "Please enter a valid email")
     private String email;
-
-    @NotNull(message = "Please enter a date")
-    private LocalDate createdAt;
 
     // Setters
     public void setUsername(String username) {
@@ -34,11 +30,7 @@ public class CreateUserDTO {
         this.email = email;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
-        this.createdAt = createdAt;
-    }
-
-        // Getters
+    // Getters
     public String getUsername() {
         return username;
     }
@@ -50,9 +42,4 @@ public class CreateUserDTO {
     public String getEmail() {
         return email;
     }
-
-    public LocalDate getCreatedAt() {
-        return createdAt;
-    }
-
 }
