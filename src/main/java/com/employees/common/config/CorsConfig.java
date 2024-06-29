@@ -1,4 +1,4 @@
-package com.employees.config;
+package com.employees.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

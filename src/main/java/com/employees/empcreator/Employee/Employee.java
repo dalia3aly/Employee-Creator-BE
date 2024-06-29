@@ -1,4 +1,4 @@
-package com.employees.empcreator;
+package com.employees.empcreator.Employee;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
