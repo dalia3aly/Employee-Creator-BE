@@ -4,11 +4,11 @@ import java.time.LocalDate;
 
 import com.employees.empcreator.Employee.ContractType;
 import com.employees.empcreator.Employee.EmploymentType;
+import com.employees.empcreator.Address.dto.UpdateAddressDTO;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-
-
 
 public class UpdateEmployeeDTO {
 
@@ -26,7 +26,8 @@ public class UpdateEmployeeDTO {
     @NotBlank(message = "Mobile number is mandatory")
     private String mobileNumber;
 
-    private String residentialAddress;
+    @NotNull(message = "Address is required")
+    private UpdateAddressDTO address;
 
     @NotBlank(message = "Contract type is mandatory")
     private ContractType contractType;
@@ -84,12 +85,12 @@ public class UpdateEmployeeDTO {
         this.mobileNumber = mobileNumber;
     }
 
-    public String getResidentialAddress() {
-        return residentialAddress;
+    public UpdateAddressDTO getAddress() {
+        return address;
     }
 
-    public void setResidentialAddress(String residentialAddress) {
-        this.residentialAddress = residentialAddress;
+    public void setAddress(UpdateAddressDTO address) {
+        this.address = address;
     }
 
     public ContractType getContractType() {
@@ -145,7 +146,7 @@ public class UpdateEmployeeDTO {
         return "UpdateEmployeeDTO [contractType=" + contractType + ", email=" + email + ", employmentType="
                 + employmentType + ", finishDate=" + finishDate + ", firstName=" + firstName + ", hoursPerWeek="
                 + hoursPerWeek + ", lastName=" + lastName + ", middleName=" + middleName + ", mobileNumber="
-                + mobileNumber + ", onGoing=" + onGoing + ", residentialAddress=" + residentialAddress + ", startDate="
+                + mobileNumber + ", onGoing=" + onGoing + ", UpdateAddressDTO=" + address + ", startDate="
                 + startDate + "]";
     }
 }
