@@ -8,6 +8,8 @@ import org.modelmapper.ModelMapper;
 import java.util.List;
 import java.util.Optional;
 
+import com.employees.empcreator.Address.Address;
+import com.employees.empcreator.Address.AddressRepository;
 import com.employees.empcreator.Employee.dto.CreateEmployeeDTO;
 import com.employees.empcreator.Employee.dto.UpdateEmployeeDTO;
 import com.employees.exceptions.EmployeeNotFoundException;
@@ -22,9 +24,14 @@ public class EmployeeService {
     @Autowired
     private ModelMapper modelMapper;
 
+    @Autowired
+    private AddressRepository addressRepo;
+
     // Create a new Employee
     public Employee createEmployee(CreateEmployeeDTO employeeDTO) {
         Employee employee = modelMapper.map(employeeDTO, Employee.class);
+        Address address = modelMapper.map(employeeDTO.getAddress(), Address.class);
+        employee.setAddress(address);
         return employeeRepo.save(employee);
     }
 
@@ -46,7 +53,12 @@ public class EmployeeService {
         }
 
         Employee foundEmployee = maybeEmployee.get();
-        modelMapper.map(updatedData, foundEmployee); // Using ModelMapper to map DTO to entity
+        modelMapper.map(updatedData, foundEmployee);
+        
+        Address address = modelMapper.map(updatedData.getAddress(), Address.class);
+        address = addressRepo.save(address);
+        foundEmployee.setAddress(address);
+        
 
         return Optional.of(employeeRepo.save(foundEmployee));
     }

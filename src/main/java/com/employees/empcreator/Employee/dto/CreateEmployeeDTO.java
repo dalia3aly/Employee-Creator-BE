@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import com.employees.empcreator.Employee.ContractType;
 import com.employees.empcreator.Employee.EmploymentType;
+import com.employees.empcreator.Address.dto.CreateAddressDTO;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -26,7 +27,8 @@ public class CreateEmployeeDTO {
     @Pattern(regexp = "\\d{10}", message = "Mobile number should be 10 digits")
     private String mobileNumber;
 
-    private String residentialAddress;
+    @NotNull(message = "Address is required")
+    private CreateAddressDTO address;
 
     @NotNull(message = "Contract type is mandatory")
     private ContractType contractType;
@@ -85,12 +87,12 @@ public class CreateEmployeeDTO {
         this.mobileNumber = mobileNumber;
     }
 
-    public String getResidentialAddress() {
-        return residentialAddress;
+    public CreateAddressDTO getAddress() {
+        return address;
     }
 
-    public void setResidentialAddress(String residentialAddress) {
-        this.residentialAddress = residentialAddress;
+    public void setAddress(CreateAddressDTO address) {
+        this.address = address;
     }
 
     public ContractType getContractType() {

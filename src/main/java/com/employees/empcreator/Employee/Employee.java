@@ -1,5 +1,6 @@
 package com.employees.empcreator.Employee;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -7,8 +8,12 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
+
+import com.employees.empcreator.Address.Address;
 
 @Entity
 @Table(name = "employees")
@@ -32,7 +37,9 @@ public class Employee {
     @Column(nullable = false)
     private String mobileNumber;
 
-    private String residentialAddress;
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -60,13 +67,13 @@ public class Employee {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", mobileNumber='" + mobileNumber + '\'' +
-                ", residentialAddress='" + residentialAddress + '\'' +
-                ", contractType=" + contractType +
-                ", startDate=" + startDate +
-                ", finishDate=" + finishDate +
-                ", onGoing=" + onGoing +
-                ", employmentType=" + employmentType +
-                ", hoursPerWeek=" + hoursPerWeek +
+                ", address= '"+ address + '\'' +
+                ", contractType=" + contractType + '\'' +
+                ", startDate=" + startDate + '\'' +
+                ", finishDate=" + finishDate + '\'' +
+                ", onGoing=" + onGoing + '\'' +
+                ", employmentType=" + employmentType + '\'' +
+                ", hoursPerWeek=" + hoursPerWeek + '\'' +
                 '}';
     }
 
@@ -95,8 +102,8 @@ public class Employee {
         return mobileNumber;
     }
 
-    public String getResidentialAddress() {
-        return residentialAddress;
+    public Address getAddress() {
+        return address;
     }
 
     public ContractType getContractType() {
@@ -148,8 +155,8 @@ public class Employee {
         this.mobileNumber = mobileNumber;
     }
 
-    public void setResidentialAddress(String residentialAddress) {
-        this.residentialAddress = residentialAddress;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public void setContractType(ContractType contractType) {
