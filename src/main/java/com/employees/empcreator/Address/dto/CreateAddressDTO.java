@@ -1,6 +1,7 @@
 package com.employees.empcreator.Address.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 public class CreateAddressDTO {
 
@@ -20,10 +21,8 @@ public class CreateAddressDTO {
     private String postcode;
 
     @NotBlank(message = "Country is required")
+    @Pattern(regexp = "Australia", message = "Australian addresses only")
     private String country;
-
-    @NotBlank(message = "Employee ID is required")
-    private Long employeeId;
 
     // Getters and setters
 
@@ -73,13 +72,5 @@ public class CreateAddressDTO {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public Long getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(Long employeeId) {
-        this.employeeId = employeeId;
     }
 }

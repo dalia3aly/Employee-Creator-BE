@@ -1,13 +1,11 @@
 package com.employees.empcreator.Address;
 
+import com.employees.empcreator.Address.dto.CreateAddressDTO;
+import com.employees.empcreator.Address.dto.UpdateAddressDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.employees.empcreator.Address.dto.CreateAddressDTO;
-import com.employees.empcreator.Address.dto.UpdateAddressDTO;
-
 import jakarta.transaction.Transactional;
-
 import java.util.Optional;
 
 @Service
@@ -18,6 +16,9 @@ public class AddressService {
     private AddressRepository addressRepo;
 
     public Address createAddress(CreateAddressDTO addressDTO) {
+        if (!"Australia".equals(addressDTO.getCountry())) {
+            throw new IllegalArgumentException("Please provide an Australian address");
+        }
         Address address = new Address();
         address.setHouseNumber(addressDTO.getHouseNumber());
         address.setStreet(addressDTO.getStreet());
@@ -33,6 +34,11 @@ public class AddressService {
         if (existingAddress.isEmpty()) {
             throw new RuntimeException("Address not found");
         }
+
+        if (!"Australia".equals(addressDTO.getCountry())) {
+            throw new IllegalArgumentException("Please provide an Australian address");
+        }
+        
         Address address = existingAddress.get();
         address.setHouseNumber(addressDTO.getHouseNumber());
         address.setStreet(addressDTO.getStreet());

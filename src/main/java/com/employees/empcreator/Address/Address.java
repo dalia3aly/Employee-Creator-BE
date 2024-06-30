@@ -30,7 +30,7 @@ public class Address {
     private String country;
 
     @OneToOne
-    @JoinColumn(name = "employee_id", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
 
     // Getters and Setters
