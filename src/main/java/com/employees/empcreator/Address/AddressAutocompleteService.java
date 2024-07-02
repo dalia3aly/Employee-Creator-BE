@@ -4,9 +4,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestClientException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class AddressAutocompleteService {
+
+    private static final Logger logger = LoggerFactory.getLogger(AddressAutocompleteService.class);
 
     @Value("${google.maps.api.key}")
     private String apiKey;
@@ -19,10 +25,40 @@ public class AddressAutocompleteService {
 
         String url = UriComponentsBuilder.fromHttpUrl(baseUrl + "/place/autocomplete/json")
                 .queryParam("input", input)
+                .queryParam("types", "address")
                 .queryParam("components", "country:au")
                 .queryParam("key", apiKey)
                 .toUriString();
 
-        return restTemplate.getForObject(url, String.class);
+        logger.info("Fetching autocomplete suggestions with URL: {}", url);
+
+        try {
+            ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+            logger.info("Received autocomplete suggestions: {}", response.getBody());
+            return response.getBody();
+        } catch (RestClientException e) {
+            logger.error("Error fetching autocomplete suggestions: ", e);
+            return null;
+        }
+    }
+
+    public String getPlaceDetails(String placeId) {
+        RestTemplate restTemplate = new RestTemplate();
+
+        String url = UriComponentsBuilder.fromHttpUrl(baseUrl + "/place/details/json")
+                .queryParam("place_id", placeId)
+                .queryParam("key", apiKey)
+                .toUriString();
+
+        logger.info("Fetching place details with URL: {}", url);
+
+        try {
+            ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+            logger.info("Received place details: {}", response.getBody());
+            return response.getBody();
+        } catch (RestClientException e) {
+            logger.error("Error fetching place details: ", e);
+            return null;
+        }
     }
 }

@@ -20,8 +20,8 @@ public class AddressService {
             throw new IllegalArgumentException("Please provide an Australian address");
         }
         Address address = new Address();
-        address.setHouseNumber(addressDTO.getHouseNumber());
-        address.setStreet(addressDTO.getStreet());
+        address.setUnitNumber(addressDTO.getUnitNumber());
+        address.setStreetAddress(addressDTO.getStreetAddress());
         address.setSuburb(addressDTO.getSuburb());
         address.setState(addressDTO.getState());
         address.setPostcode(addressDTO.getPostcode());
@@ -38,10 +38,10 @@ public class AddressService {
         if (!"Australia".equals(addressDTO.getCountry())) {
             throw new IllegalArgumentException("Please provide an Australian address");
         }
-        
+
         Address address = existingAddress.get();
-        address.setHouseNumber(addressDTO.getHouseNumber());
-        address.setStreet(addressDTO.getStreet());
+        address.setUnitNumber(addressDTO.getUnitNumber());
+        address.setStreetAddress(addressDTO.getStreetAddress());
         address.setSuburb(addressDTO.getSuburb());
         address.setState(addressDTO.getState());
         address.setPostcode(addressDTO.getPostcode());
