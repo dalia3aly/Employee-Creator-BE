@@ -38,9 +38,8 @@ public class EmployeeController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Optional<Employee>> updateEmployee(@PathVariable Long id,
-            @RequestBody UpdateEmployeeDTO updatedData) {
-        Optional<Employee> updatedEmployee = employeeService.updateEmployeeById(id, updatedData);
+    public ResponseEntity<Optional<Employee>> updateEmployee(@PathVariable Long id, @RequestBody UpdateEmployeeDTO updatedData) {
+        Optional<Employee> updatedEmployee = employeeService.updateEmployee(id, updatedData);
         return ResponseEntity.ok(updatedEmployee);
     }
 
