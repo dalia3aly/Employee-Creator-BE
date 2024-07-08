@@ -5,11 +5,10 @@ import jakarta.validation.constraints.Pattern;
 
 public class CreateAddressDTO {
 
-    @NotBlank(message = "House/unit number is required")
-    private String houseNumber;
+    private String unitNumber;
 
-    @NotBlank(message = "Street is required")
-    private String street;
+    @NotBlank(message = "Street address is required")
+    private String streetAddress;
 
     @NotBlank(message = "Suburb is required")
     private String suburb;
@@ -26,20 +25,20 @@ public class CreateAddressDTO {
 
     // Getters and setters
 
-    public String getHouseNumber() {
-        return houseNumber;
+    public String getUnitNumber() {
+        return unitNumber;
     }
 
-    public void setHouseNumber(String houseNumber) {
-        this.houseNumber = houseNumber;
+    public void setUnitNumber(String unitNumber) {
+        this.unitNumber = unitNumber;
     }
 
-    public String getStreet() {
-        return street;
+    public String getStreetAddress() {
+        return streetAddress;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
     }
 
     public String getSuburb() {

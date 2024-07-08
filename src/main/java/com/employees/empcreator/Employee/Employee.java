@@ -8,6 +8,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
@@ -36,7 +37,8 @@ public class Employee {
     @Column(nullable = false)
     private String mobileNumber;
 
-    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 
     @Enumerated(EnumType.STRING)
@@ -65,7 +67,7 @@ public class Employee {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", mobileNumber='" + mobileNumber + '\'' +
-                ", address= '"+ address + '\'' +
+                ", address= '" + address + '\'' +
                 ", contractType=" + contractType + '\'' +
                 ", startDate=" + startDate + '\'' +
                 ", finishDate=" + finishDate + '\'' +

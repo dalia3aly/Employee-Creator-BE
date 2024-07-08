@@ -11,11 +11,11 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String houseNumber;
+    @Column(nullable = true)
+    private String unitNumber;
 
     @Column(nullable = false)
-    private String street;
+    private String streetAddress;
 
     @Column(nullable = false)
     private String suburb;
@@ -42,20 +42,20 @@ public class Address {
         this.id = id;
     }
 
-    public String getHouseNumber() {
-        return houseNumber;
+    public String getUnitNumber() {
+        return unitNumber;
     }
 
-    public void setHouseNumber(String houseNumber) {
-        this.houseNumber = houseNumber;
+    public void setUnitNumber(String unitNumber) {
+        this.unitNumber = unitNumber;
     }
 
-    public String getStreet() {
-        return street;
+    public String getStreetAddress() {
+        return streetAddress;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
     }
 
     public String getSuburb() {
@@ -94,8 +94,8 @@ public class Address {
     public String toString() {
         return "Address{" +
                 "id=" + id +
-                ", houseNumber='" + houseNumber + '\'' +
-                ", street='" + street + '\'' +
+                ", unitNumber='" + unitNumber + '\'' +
+                ", streetAddress='" + streetAddress + '\'' +
                 ", suburb='" + suburb + '\'' +
                 ", state='" + state + '\'' +
                 ", postcode='" + postcode + '\'' +

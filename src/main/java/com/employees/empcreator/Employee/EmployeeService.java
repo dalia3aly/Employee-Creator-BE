@@ -29,10 +29,20 @@ public class EmployeeService {
 
     // Create a new Employee
     public Employee createEmployee(CreateEmployeeDTO employeeDTO) {
+        // Map DTO to Employee entity
         Employee employee = modelMapper.map(employeeDTO, Employee.class);
+
+        // Map DTO to Address entity and save it
         Address address = modelMapper.map(employeeDTO.getAddress(), Address.class);
-        employee.setAddress(address);
-        return employeeRepo.save(employee);
+        Address savedAddress = addressRepo.save(address);
+
+        // link the saved address to the employee to make sure the address_id column is populated
+        employee.setAddress(savedAddress);
+
+        Employee savedEmployee = employeeRepo.save(employee);
+        addressRepo.save(savedAddress);
+
+        return savedEmployee;
     }
 
     // Find all Employees
@@ -46,23 +56,32 @@ public class EmployeeService {
     }
 
     // Update an Employee
-    public Optional<Employee> updateEmployeeById(Long id, UpdateEmployeeDTO updatedData) {
-        Optional<Employee> maybeEmployee = this.findById(id);
+    public Optional<Employee> updateEmployee(Long id, UpdateEmployeeDTO employeeDTO) {
+        Optional<Employee> maybeEmployee = employeeRepo.findById(id);
+
         if (maybeEmployee.isEmpty()) {
             throw new EmployeeNotFoundException("Employee with ID " + id + " not found");
         }
 
-        Employee foundEmployee = maybeEmployee.get();
-        modelMapper.map(updatedData, foundEmployee);
-        
-        Address address = modelMapper.map(updatedData.getAddress(), Address.class);
-        address = addressRepo.save(address);
-        foundEmployee.setAddress(address);
-        
+        Employee employee = maybeEmployee.get();
+        modelMapper.map(employeeDTO, employee);
 
-        return Optional.of(employeeRepo.save(foundEmployee));
+        Address address;
+        if (employee.getAddress() != null) {
+            // Update existing address
+            address = employee.getAddress();
+            modelMapper.map(employeeDTO.getAddress(), address);
+        } else {
+            // Create new address
+            address = modelMapper.map(employeeDTO.getAddress(), Address.class);
+        }
+
+        Address savedAddress = addressRepo.save(address);
+        employee.setAddress(savedAddress);
+
+        return Optional.of(employeeRepo.save(employee));
     }
-
+   
     // Delete an Employee
     public boolean deleteEmployeeById(Long id) {
         Optional<Employee> maybeEmployee = this.findById(id);
