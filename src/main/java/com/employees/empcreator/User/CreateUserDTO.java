@@ -6,11 +6,11 @@ import jakarta.validation.constraints.Size;
 
 public class CreateUserDTO {
     @NotBlank(message = "Please enter a Username")
-    @Size(min = 8, max = 8, message = "Username should be 8 characters")
+    @Size(min = 8, max = 12, message = "Username should be between 8 and 12 characters")
     private String username;
 
     @NotBlank(message = "Please enter a strong password")
-    @Size(min = 8, max = 16, message = "Password should be between 8 and 16 characters")
+    @Size(min = 8, max = 16, message = "Password should be between 8 and 16 characters and digits")
     private String password;
 
     @Pattern(regexp = "^(.+)@(.+)$", message = "Please enter a valid email")

@@ -55,7 +55,7 @@ public class EmployeeService {
         return employeeRepo.findById(id);
     }
 
-    // Update an Employee
+    // Update an Employee by ID
     public Optional<Employee> updateEmployee(Long id, UpdateEmployeeDTO employeeDTO) {
         Optional<Employee> maybeEmployee = employeeRepo.findById(id);
 

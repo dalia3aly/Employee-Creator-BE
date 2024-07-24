@@ -24,10 +24,28 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * Creates a new user based on the provided user data transfer object (DTO).
+     *
+     * @param  userDTO  the user data transfer object containing the user's information
+     * @return          the newly created user
+     * @throws IllegalArgumentException if the userDTO is null or the user object is null
+     * @throws IllegalStateException    if an error occurs while saving the user
+     */
     public User createUser(CreateUserDTO userDTO) {
+        if (userDTO == null) {
+            throw new IllegalArgumentException("CreateUserDTO is null");
+        }
         User user = modelMapper.map(userDTO, User.class);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepo.save(user);
+        if (user == null) {
+            throw new IllegalArgumentException("User is null");
+        }
+        try {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            return userRepo.save(user);
+        } catch (Exception e) {
+            throw new IllegalStateException("An error occurred while saving the user");
+        }
     }
 
     public List<User> findAllUsers() {

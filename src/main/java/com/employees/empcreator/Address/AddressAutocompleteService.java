@@ -20,6 +20,12 @@ public class AddressAutocompleteService {
     @Value("${google.maps.api.baseurl}")
     private String baseUrl;
 
+    /**
+     * Retrieves autocomplete suggestions for a given input.
+     *
+     * @param  input the input string for which suggestions are requested
+     * @return        the autocomplete suggestions as a JSON string, or null if an error occurs
+     */
     public String getAutocompleteSuggestions(String input) {
         RestTemplate restTemplate = new RestTemplate();
 
@@ -42,6 +48,14 @@ public class AddressAutocompleteService {
         }
     }
 
+    /**
+     * Retrieves the details of a place using the provided place ID.
+     *
+     * @param placeId the ID of the place to retrieve details for
+     * @return The response from the server is logged, and if successful, the
+     *         response body is returned as a JSON string,
+     *         or null if an error occurs
+     */
     public String getPlaceDetails(String placeId) {
         RestTemplate restTemplate = new RestTemplate();
 

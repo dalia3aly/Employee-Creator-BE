@@ -18,6 +18,12 @@ public class AddressAutocompleteController {
     @Autowired
     private AddressAutocompleteService addressAutocompleteService;
 
+    /**
+     * Retrieves autocomplete suggestions for a given input.
+     *
+     * @param  input the input string for which suggestions are requested
+     * @return        the autocomplete suggestions as a JSON string, or a 500 error response if an error occurs
+     */
     @GetMapping("/autocomplete")
     public ResponseEntity<String> getAutocompleteSuggestions(@RequestParam String input) {
         logger.info("Received autocomplete request for input: {}", input);
@@ -29,6 +35,13 @@ public class AddressAutocompleteController {
         }
     }
 
+    /**
+     * Retrieves the details of a place using the provided place ID.
+     *
+     * @param  placeId the ID of the place to retrieve details for
+     * @return         a ResponseEntity containing the place details as a JSON string,
+     *                 or a ResponseEntity with a 500 status and an error message if an error occurs
+     */
     @GetMapping("/details")
     public ResponseEntity<String> getPlaceDetails(@RequestParam String placeId) {
         logger.info("Received place details request for placeId: {}", placeId);
